@@ -16,19 +16,25 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type LearningObjectUpdateFormInputValues = {
     title?: string;
     description?: string;
-    content?: string;
+    blocks?: string;
+    time?: number;
+    editorVersion?: string;
 };
 export declare type LearningObjectUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
-    content?: ValidationFunction<string>;
+    blocks?: ValidationFunction<string>;
+    time?: ValidationFunction<number>;
+    editorVersion?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type LearningObjectUpdateFormOverridesProps = {
     LearningObjectUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
-    content?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    blocks?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    time?: PrimitiveOverrideProps<TextFieldProps>;
+    editorVersion?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type LearningObjectUpdateFormProps = React.PropsWithChildren<{
     overrides?: LearningObjectUpdateFormOverridesProps | undefined | null;

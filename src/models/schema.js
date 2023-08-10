@@ -24,10 +24,24 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "content": {
-                    "name": "content",
+                "blocks": {
+                    "name": "blocks",
                     "isArray": false,
                     "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "time": {
+                    "name": "time",
+                    "isArray": false,
+                    "type": "AWSTimestamp",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "editorVersion": {
+                    "name": "editorVersion",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -77,5 +91,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "e7ad5dbe661f52495a432a17bf6733c6"
+    "version": "4b9bdf95bcc50d9e7ea204779e725950"
 };

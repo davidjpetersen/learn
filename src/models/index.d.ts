@@ -14,7 +14,9 @@ type EagerLearningObject = {
   readonly id: string;
   readonly title?: string | null;
   readonly description?: string | null;
-  readonly content?: string | null;
+  readonly blocks?: string | null;
+  readonly time?: number | null;
+  readonly editorVersion?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -27,7 +29,9 @@ type LazyLearningObject = {
   readonly id: string;
   readonly title?: string | null;
   readonly description?: string | null;
-  readonly content?: string | null;
+  readonly blocks?: string | null;
+  readonly time?: number | null;
+  readonly editorVersion?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

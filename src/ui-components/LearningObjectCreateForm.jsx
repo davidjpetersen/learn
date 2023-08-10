@@ -31,24 +31,34 @@ export default function LearningObjectCreateForm(props) {
   const initialValues = {
     title: "",
     description: "",
-    content: "",
+    blocks: "",
+    time: "",
+    editorVersion: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
-  const [content, setContent] = React.useState(initialValues.content);
+  const [blocks, setBlocks] = React.useState(initialValues.blocks);
+  const [time, setTime] = React.useState(initialValues.time);
+  const [editorVersion, setEditorVersion] = React.useState(
+    initialValues.editorVersion
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setTitle(initialValues.title);
     setDescription(initialValues.description);
-    setContent(initialValues.content);
+    setBlocks(initialValues.blocks);
+    setTime(initialValues.time);
+    setEditorVersion(initialValues.editorVersion);
     setErrors({});
   };
   const validations = {
     title: [],
     description: [],
-    content: [{ type: "JSON" }],
+    blocks: [{ type: "JSON" }],
+    time: [],
+    editorVersion: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -78,7 +88,9 @@ export default function LearningObjectCreateForm(props) {
         let modelFields = {
           title,
           description,
-          content,
+          blocks,
+          time,
+          editorVersion,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -135,7 +147,9 @@ export default function LearningObjectCreateForm(props) {
             const modelFields = {
               title: value,
               description,
-              content,
+              blocks,
+              time,
+              editorVersion,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -161,7 +175,9 @@ export default function LearningObjectCreateForm(props) {
             const modelFields = {
               title,
               description: value,
-              content,
+              blocks,
+              time,
+              editorVersion,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -177,7 +193,7 @@ export default function LearningObjectCreateForm(props) {
         {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextAreaField
-        label="Content"
+        label="Blocks"
         isRequired={false}
         isReadOnly={false}
         onChange={(e) => {
@@ -186,21 +202,83 @@ export default function LearningObjectCreateForm(props) {
             const modelFields = {
               title,
               description,
-              content: value,
+              blocks: value,
+              time,
+              editorVersion,
             };
             const result = onChange(modelFields);
-            value = result?.content ?? value;
+            value = result?.blocks ?? value;
           }
-          if (errors.content?.hasError) {
-            runValidationTasks("content", value);
+          if (errors.blocks?.hasError) {
+            runValidationTasks("blocks", value);
           }
-          setContent(value);
+          setBlocks(value);
         }}
-        onBlur={() => runValidationTasks("content", content)}
-        errorMessage={errors.content?.errorMessage}
-        hasError={errors.content?.hasError}
-        {...getOverrideProps(overrides, "content")}
+        onBlur={() => runValidationTasks("blocks", blocks)}
+        errorMessage={errors.blocks?.errorMessage}
+        hasError={errors.blocks?.hasError}
+        {...getOverrideProps(overrides, "blocks")}
       ></TextAreaField>
+      <TextField
+        label="Time"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={time}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              blocks,
+              time: value,
+              editorVersion,
+            };
+            const result = onChange(modelFields);
+            value = result?.time ?? value;
+          }
+          if (errors.time?.hasError) {
+            runValidationTasks("time", value);
+          }
+          setTime(value);
+        }}
+        onBlur={() => runValidationTasks("time", time)}
+        errorMessage={errors.time?.errorMessage}
+        hasError={errors.time?.hasError}
+        {...getOverrideProps(overrides, "time")}
+      ></TextField>
+      <TextField
+        label="Editor version"
+        isRequired={false}
+        isReadOnly={false}
+        value={editorVersion}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              blocks,
+              time,
+              editorVersion: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.editorVersion ?? value;
+          }
+          if (errors.editorVersion?.hasError) {
+            runValidationTasks("editorVersion", value);
+          }
+          setEditorVersion(value);
+        }}
+        onBlur={() => runValidationTasks("editorVersion", editorVersion)}
+        errorMessage={errors.editorVersion?.errorMessage}
+        hasError={errors.editorVersion?.hasError}
+        {...getOverrideProps(overrides, "editorVersion")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

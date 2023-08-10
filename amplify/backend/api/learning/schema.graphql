@@ -2,5 +2,8 @@ type LearningObject @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String
   description: String
-  content: AWSJSON
+  blocks: AWSJSON
+  time: AWSTimestamp
+  editorVersion: String
 }
+ 
